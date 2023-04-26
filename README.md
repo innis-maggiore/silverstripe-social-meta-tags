@@ -20,11 +20,12 @@ Supported social media meta tags include:
   * `twitter:card`
 
 ## Requirements
-SilverStripe 3.5+
+SilverStripe 4.2+
 
+Use the `1.0.1` tag ([ss3 branch](https://github.com/innis-maggiore/silverstripe-social-meta-tags/tree/1.0.1)) for SilverStripe 3 sites.
 
 ## Installation
-1. ``composer require creativecodelabs/silverstripe-social-meta-tags``
+1. ``composer require innis-maggiore/silverstripe-social-meta-tags ^4.0``
 2. run a `/dev/build?flush=all`
 3. Without any configuration, the module will begin rendering social media meta tags for all page types. 
 
@@ -45,23 +46,23 @@ NOTE: `twitter:card` will be set to `"summary"` by default, unless an image fiel
 ## Configuration
 Configure the module by editing ``mysite/_config/config.yml`` and set the following options:
 ```yml
-SocialMetaTags:
-  default_title: 'PageTitle' 
+InnisMaggiore\SocialMetaTags:
+  default_title: 'Title' 
   default_description: 'MetaDescription' 
   meta_description_default: true 
   twitter_site: '' 
   titles:	
-    ClassName: 'FieldName'
-    ClassName1: 'FieldName1'
+    Fully\Namespaced\ClassName: 'FieldName'
+    Fully\Namespaced\ClassName1: 'FieldName1'
   descriptions:
-    ClassName: 'FieldName'
-    ClassName1: 'FieldName1'
+    Fully\Namespaced\ClassName: 'FieldName'
+    Fully\Namespaced\ClassName1: 'FieldName1'
   images:	
-    ClassName: 'FieldName'
-    ClassName1: 'FieldName1'
+    Fully\Namespaced\ClassName: 'FieldName'
+    Fully\Namespaced\ClassName1: 'FieldName1'
   types:
-    ClassName: 'website'
-    ClassName1: 'article'
+    Fully\Namespaced\ClassName: 'website'
+    Fully\Namespaced\ClassName1: 'article'
 ```
 * `default_title` - override the default title field to use; `PageTitle` is used by default.
 * `default_description` - override the default description field to use; `MetaDescription` is used by default.
@@ -74,34 +75,38 @@ SocialMetaTags:
 
 ## Example `config.yml`
 ```yml
-SocialMetaTags:
+InnisMaggiore\SocialMetaTags:
   default_title: 'PageTitle'
   default_description: ''
   meta_description_default: true
   titles:
-    Category: 'Name'
-    Product: 'Name'
-    Recipe: 'Name'
+    InnisMaggiore\Models\Category: 'Name'
+    InnisMaggiore\Models\Product: 'Name'
+    InnisMaggiore\Models\Recipe: 'Name'
   descriptions:
-    Category: 'ShortDescr'
-    Product: 'Summary'
-    Recipe: 'MetaDescription'
+    InnisMaggiore\Models\Category: 'ShortDescr'
+    InnisMaggiore\Models\Product: 'Summary'
+    InnisMaggiore\Models\Recipe: 'MetaDescription'
   images:
-    AboutUsPage: 'LogoImage'
-    Category: 'BeautyShot'
-    Product: 'BeautyShot'
-    Recipe: 'Image'
+    InnisMaggiore\Pagetypes\AboutUsPage: 'LogoImage'
+    InnisMaggiore\Models\Category: 'BeautyShot'
+    InnisMaggiore\Models\Product: 'BeautyShot'
+    InnisMaggiore\Models\Recipe: 'Image'
   types:
-    Recipe: 'article'
+    InnisMaggiore\Models\Recipe: 'article'
   twitter_site: ''
 ```
 ## Adding social media meta tags to DataObjects
 By default, this module will only add social media meta tags to SiteTree objects.
 
 To add social media meta tags to DataObjects:
-* in `/mysite/_config.php`, add the extension to each DataObject class you wish.
-  * e.g. `Recipe::add_extension('SocialMetaTagsExtension');`
-* in `/mysite/_config/config.yml`, set options for `titles`, `descriptions`, and `images` (if desired) for your class.
+* in `_config/config.yml`, add the extension to each DataObject class you wish:
+```yml
+Fully\Namespaced\Dataobject:
+  extensions:
+    - InnisMaggiore\SilverstripeSocialMetaTags\SocialMetaTagsExtension
+```
+* in `_config/config.yml`, set options for `titles`, `descriptions`, and `images` (if desired) for your class.
   * for an example, see the above example `config.yml`.
 * in your DataObject's class, add new fields in `getCMSFields()`:
 ```php
@@ -119,4 +124,4 @@ To add social media meta tags to DataObjects:
 * run a `/dev/build?flush=all`
 
 ## License
-This project is licensed under [GPL v3](./LICENSE)
+This project is licensed under the [New BSD License](./LICENSE)

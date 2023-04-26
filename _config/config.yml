@@ -1,0 +1,3 @@
+Silverstripe\CMS\Model\SiteTree:
+  extensions:
+    - InnisMaggiore\SilverstripeSocialMetaTags\SocialMetaTagsExtension
