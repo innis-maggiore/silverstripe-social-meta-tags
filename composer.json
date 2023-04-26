@@ -1,0 +1,15 @@
+{
+  "name": "innis-maggiore/silverstripe-social-meta-tags",
+  "description": "Adds social media meta tags to Silverstripe sites.",
+  "type": "silverstripe-module",
+  "license": "GPL-3.0-only",
+  "authors": [
+	{
+	  "name": "Joe Chenevey",
+	  "email": "web-dev@innismaggiore.com"
+	}
+  ],
+  "require": {
+	"silverstripe/framework": "^3.5.0"
+  }
+}
