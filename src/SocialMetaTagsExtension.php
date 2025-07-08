@@ -31,8 +31,8 @@ class SocialMetaTagsExtension extends Extension {
         $owner = $this->getOwner();
 
         if (is_subclass_of($owner, SiteTree::class) && !is_a($owner, RedirectorPage::class) && !is_a($owner, ErrorPage::class)) {
-            $fields->addFieldToTab('Root.Main.Metadata', TextareaField::create("SocialMetaDescription")->addExtraClass("stacked"));
-            $fields->addFieldToTab('Root.Main.Metadata', UploadField::create("SocialMetaImage")->addExtraClass("stacked"));
+            $fields->insertAfter('ExtraMeta', TextareaField::create("SocialMetaDescription")->addExtraClass("stacked"));
+            $fields->insertAfter('ExtraMeta', UploadField::create("SocialMetaImage")->addExtraClass("stacked"));
         }
     }
 
