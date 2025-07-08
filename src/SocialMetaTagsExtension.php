@@ -2,7 +2,7 @@
 
 namespace InnisMaggiore\SilverstripeSocialMetaTags;
 
-use Silverstripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
@@ -14,7 +14,7 @@ use SilverStripe\Assets\Image;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\CMS\Model\RedirectorPage;
 
-class SocialMetaTagsExtension extends DataExtension {
+class SocialMetaTagsExtension extends Extension {
     private static $db = array(
         "SocialMetaDescription" => "Text"
     );
