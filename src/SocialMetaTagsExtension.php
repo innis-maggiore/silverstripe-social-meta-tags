@@ -15,17 +15,17 @@ use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\CMS\Model\RedirectorPage;
 
 class SocialMetaTagsExtension extends Extension {
-    private static $db = array(
+    private static $db = [
         "SocialMetaDescription" => "Text"
-    );
+    ];
 
-    private static $has_one = array(
+    private static $has_one = [
         "SocialMetaImage"   => Image::class
-    );
+    ];
 
-    private static $owns = array(
+    private static $owns = [
         "SocialMetaImage"
-    );
+    ];
 
     public function updateCMSFields(FieldList $fields) {
         $owner = $this->getOwner();
@@ -36,7 +36,7 @@ class SocialMetaTagsExtension extends Extension {
         }
     }
 
-    public function MetaTags(&$tags) {
+    public function updateMetaTags(&$tags) {
         $owner = $this->getOwner();
         $className = $owner->ClassName;
 
