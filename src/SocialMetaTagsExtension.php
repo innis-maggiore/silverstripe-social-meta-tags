@@ -8,6 +8,7 @@ use SilverStripe\Forms\TextareaField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Core\Convert;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\ORM\DataObject;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\ErrorPage\ErrorPage;
 use SilverStripe\Assets\Image;
@@ -30,7 +31,9 @@ class SocialMetaTagsExtension extends Extension {
     public function updateCMSFields(FieldList $fields) {
         $owner = $this->getOwner();
 
-        if (is_subclass_of($owner, SiteTree::class) && !is_a($owner, RedirectorPage::class) && !is_a($owner, ErrorPage::class)) {
+        if (($owner instanceof SiteTree || $owner instanceof DataObject)
+            && !($owner instanceof RedirectorPage)
+            && !($owner instanceof ErrorPage)) {
             $fields->insertAfter('ExtraMeta', TextareaField::create("SocialMetaDescription")->addExtraClass("stacked"));
             $fields->insertAfter('ExtraMeta', UploadField::create("SocialMetaImage")->addExtraClass("stacked"));
         }
